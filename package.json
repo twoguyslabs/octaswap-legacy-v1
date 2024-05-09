@@ -1,0 +1,18 @@
+{
+  "name": "octaswap",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prettier": "^3.2.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "backend": "anvil",
+    "frontend": "cd frontend && yarn dev",
+    "dev": "concurrently 'yarn run backend' 'yarn run frontend'"
+  },
+  "dependencies": {
+    "prettier-plugin-tailwindcss": "^0.5.14"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "semi": false,
+  "useTabs": false,
+  "tabWidth": 2,
+  "printWidth": 80,
+  "jsxSingleQuote": true,
+  "bracketSpacing": true,
+  "singleQuote": true,
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "overrides": [
+    {
+      "files": "*.sol",
+      "options": {
+        "printWidth": 200,
+        "tabWidth": 4,
+        "useTabs": false,
+        "singleQuote": false,
+        "bracketSpacing": false,
+        "explicitTypes": "preserve"
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://uniswap.org/tokenlist.schema.json",
+  "timestamp": "2024-05-02T21:13:46+00:00",
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "keywords": ["octaswap", "test"],
+  "logoURI": "https://silver-rare-partridge-940.mypinata.cloud/ipfs/QmRhm9i5nnrf6jqS78Sa1MeYR7A1ex9zB6ULsCcebZGvPh",
+  "name": "OctaSwap Test",
+  "tokens": [
+    {
+      "chainId": 31337,
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "decimals": 18,
+      "name": "OctaSwap",
+      "symbol": "OCS",
+      "logoURI": "https://silver-rare-partridge-940.mypinata.cloud/ipfs/QmRhm9i5nnrf6jqS78Sa1MeYR7A1ex9zB6ULsCcebZGvPh"
+    },
+    {
+      "chainId": 31337,
+      "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "decimals": 18,
+      "name": "Pacman",
+      "symbol": "PAC",
+      "logoURI": "https://silver-rare-partridge-940.mypinata.cloud/ipfs/QmV56nTkSso1qpaADZvP3G2hhDFpiDW39T4S1wUEEUuuwm"
+    },
+    {
+      "chainId": 31337,
+      "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "decimals": 18,
+      "name": "LuckyBucks",
+      "symbol": "LBC",
+      "logoURI": "https://silver-rare-partridge-940.mypinata.cloud/ipfs/QmPDKTKQs4LhjEe7YsZ5UgQSvKCGT6AS6z1yvBFAmjvohG"
+    }
+  ]
+}
