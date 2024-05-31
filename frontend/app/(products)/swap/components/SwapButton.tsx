@@ -5,6 +5,7 @@ import useWrapped from '../../hooks/useWrapped'
 import useCurrencyAddresses from '../../hooks/useCurrencyAddresses'
 import useCurrencyFromUrl from '../../hooks/useCurrencyFromUrl'
 import usePair from '../../hooks/usePair'
+import useWrappedPair from '../../hooks/useWrappedPair'
 
 export default function SwapButton({
   inputCurrency,
@@ -29,25 +30,18 @@ export default function SwapButton({
   onApprove: () => void
   onSwap: () => void
 }) {
-  const wrapped = useWrapped()
+  const { nativeA: nativeInput } = useCurrencyAddresses(inputCurrency, outputCurrency)
 
-  const {
-    nativeA: nativeInput,
-    nativeB: nativeOutput,
-    tokenA: tokenInput,
-    tokenB: tokenOutput,
-  } = useCurrencyAddresses(inputCurrency, outputCurrency)
-
+  const isWrappedPair = useWrappedPair(inputCurrency, outputCurrency)
   const { isPairAddress } = usePair(inputCurrency, outputCurrency)
 
-  const isNativeWrappedPair =
-    (nativeInput && tokenOutput?.address === wrapped) || (nativeOutput && tokenInput?.address === wrapped)
+  const isPair = isWrappedPair ? false : !isPairAddress
 
   const getDisabledState = () => {
     if (isRouterAllowance) {
-      return !isTradeType || isSwapping || !isPairAddress
+      return !isTradeType || isSwapping || isPair
     } else {
-      return !isApprovePayload || isApproving || !isPairAddress
+      return !isApprovePayload || isApproving || isPair
     }
   }
 
@@ -60,7 +54,7 @@ export default function SwapButton({
   }
 
   const getButtonText = () => {
-    if (isNativeWrappedPair) {
+    if (isWrappedPair) {
       if (nativeInput) {
         return 'Wrap'
       } else {

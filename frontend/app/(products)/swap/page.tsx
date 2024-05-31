@@ -12,6 +12,7 @@ import useSwapAmounts from './hooks/useSwapAmounts'
 import useSlippage from '../hooks/useSlippage'
 import useDeadline from '../hooks/useDeadline'
 import useSwap from './hooks/useSwap'
+import usePair from '../hooks/usePair'
 
 export default function Swap() {
   const { input: inputCurrency, output: outputCurrency } = useCurrencyFromUrl()
@@ -32,6 +33,8 @@ export default function Swap() {
   const {
     amountsIn,
     amountsOut,
+    isFetchingAmountsIn,
+    isFetchingAmountsOut,
     isRouterAllowance,
     isApprovePayload,
     isApproving,
@@ -42,8 +45,7 @@ export default function Swap() {
     handleOnSwap,
   } = useSwap(inputAmount, outputAmount, slippage.percent, input.currency, output.currency, deadline)
 
-  const ratesIn = amountsIn ? amountsIn : outputAmount
-  const ratesOut = amountsOut ? amountsOut : inputAmount
+  const { isPairAddress, pairAddress } = usePair(input.currency, output.currency)
 
   return (
     <main>
@@ -54,7 +56,7 @@ export default function Swap() {
             width='650'
             id='geckoterminal-embed'
             title='GeckoTerminal Embed'
-            src='https://www.geckoterminal.com/octaspace/pools/0x595ee9dd6ca0c778dce1903c83c59e79336d1e93?embed=1&info=0&swaps=0'
+            src={`https://www.geckoterminal.com/octaspace/pools/${isPairAddress ? pairAddress : '0x595ee9dd6ca0c778dce1903c83c59e79336d1e93'}?embed=1&info=0&swaps=0`}
             frameBorder='0'
             allow='clipboard-write'
             allowFullScreen
@@ -65,7 +67,8 @@ export default function Swap() {
           <SwapSettings slippage={slippage} onSetSlippage={setSlippage} minutes={minutes} onSetMinutes={setMinutes} />
           <div className='relative space-y-1'>
             <SwapBox
-              currencyAmount={inputAmount || ratesIn}
+              isFetchingAmounts={isFetchingAmountsIn}
+              currencyAmount={inputAmount || amountsIn}
               onSetAmount={setInputAmount}
               currency={input.currency}
               onSelectCurrency={setInput}
@@ -78,7 +81,8 @@ export default function Swap() {
               onSetOutput={setOutput}
             />
             <SwapBox
-              currencyAmount={outputAmount || ratesOut}
+              isFetchingAmounts={isFetchingAmountsOut}
+              currencyAmount={outputAmount || amountsOut}
               onSetAmount={setOutputAmount}
               currency={output.currency}
               onSelectCurrency={setOutput}

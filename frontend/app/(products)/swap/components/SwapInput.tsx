@@ -1,11 +1,14 @@
+import { SpokeSpinner } from '@/components/Spinner'
 import { Input } from '@/components/ui/input'
 import { Dispatch, SetStateAction } from 'react'
 import { formatEther, parseEther } from 'viem'
 
 export default function SwapInput({
+  isFetchingAmounts,
   currencyAmount,
   onSetAmount,
 }: {
+  isFetchingAmounts: boolean
   currencyAmount: string | bigint | undefined
   onSetAmount: (amount: string | bigint) => void
 }) {
@@ -17,7 +20,9 @@ export default function SwapInput({
       : currencyAmount
     : ''
 
-  return (
+  return isFetchingAmounts ? (
+    <SpokeSpinner size='lg' />
+  ) : (
     <Input
       type='text'
       placeholder='0'

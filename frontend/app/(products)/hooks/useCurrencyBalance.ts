@@ -1,5 +1,5 @@
 import { useAccount, useBalance, useReadContract, useReadContracts } from 'wagmi'
-import { erc20Abi } from 'viem'
+import { erc20Abi, formatEther } from 'viem'
 import { useEffect, useState } from 'react'
 
 export default function useCurrencyBalance(tokenAddress?: string) {
@@ -7,7 +7,12 @@ export default function useCurrencyBalance(tokenAddress?: string) {
 
   const account = useAccount()
 
-  const { data: nativeBalance } = useBalance({ address: account.address })
+  const { data: nativeBalance } = useBalance({
+    address: account.address,
+    query: {
+      refetchInterval: 1000,
+    },
+  })
   const address = account.address as `0x${string}`
 
   const { data: tokenBalance } = useReadContract({
@@ -15,6 +20,9 @@ export default function useCurrencyBalance(tokenAddress?: string) {
     address: tokenAddress as `0x${string}`,
     functionName: 'balanceOf',
     args: [address],
+    query: {
+      refetchInterval: 1000,
+    },
   })
 
   useEffect(() => {

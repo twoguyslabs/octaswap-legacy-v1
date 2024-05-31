@@ -40,7 +40,8 @@ export default function Balance({
   onSetAmount: (amount: string | bigint) => void
 }) {
   const getBalance = useCurrencyBalance(tokenAddress) ?? BigInt(0)
-  const balance = getBalance > parseEther('1') ? formatEther(getBalance).split('.')[0] : formatEther(getBalance)
+  const balance =
+    getBalance > parseEther('1') ? formatEther(getBalance).split('.')[0] : Number(formatEther(getBalance)).toFixed(5)
 
   return (
     <div className={cn(style)}>

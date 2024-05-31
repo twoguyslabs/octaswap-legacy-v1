@@ -15,7 +15,7 @@ const metadata = {
   icons: ['https://silver-rare-partridge-940.mypinata.cloud/ipfs/QmRhm9i5nnrf6jqS78Sa1MeYR7A1ex9zB6ULsCcebZGvPh'],
 }
 
-const chains = isDevelopment ? ([foundry] as const) : ([octaspace] as const)
+const chains = [octaspace] as const
 
 export const config = defaultWagmiConfig({
   chains,
