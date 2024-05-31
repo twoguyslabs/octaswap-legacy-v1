@@ -18,15 +18,15 @@ const LINKS: { href: string; text: string }[] = [
     text: 'Swap',
   },
   {
-    href: 'octaswap.io/pools',
+    href: 'https://octaswap.io/pools',
     text: 'Pools',
   },
   {
-    href: 'octaswap.io/launchpad',
+    href: 'https://octaswap.io/launchpad',
     text: 'Launchpad',
   },
   {
-    href: 'octaswap.io/claim',
+    href: 'https://octaswap.io/claim',
     text: 'Vesting',
   },
 ]
@@ -39,7 +39,11 @@ function NavigationLink({ link }: { link: LinksType[number] }) {
 
   return (
     <Link href={link.href} legacyBehavior passHref>
-      <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), 'text-xl md:text-lg')} active={isActive}>
+      <NavigationMenuLink
+        className={cn(navigationMenuTriggerStyle(), 'text-xl md:text-lg')}
+        active={isActive}
+        target='_blank'
+      >
         {link.text}
       </NavigationMenuLink>
     </Link>
