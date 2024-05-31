@@ -108,7 +108,7 @@ export default function useTradeType(
     },
   })
 
-  const nativeWrapped = inputUrl === 'ETH' && outputUrl === wrapped ? wrapOcta : unwrapOcta
+  const nativeWrapped = inputUrl === 'OCTA' && outputUrl === wrapped ? wrapOcta : unwrapOcta
 
   const tradeType =
     swapExactTokensForTokens ||
@@ -136,8 +136,6 @@ export default function useTradeType(
       className: 'rounded-lg',
     })
   }
-
-  console.log(tradeType)
 
   return { isTradeType, handleOnTrade, isSwapping }
 }

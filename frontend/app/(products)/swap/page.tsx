@@ -16,7 +16,7 @@ import useSwap from './hooks/useSwap'
 export default function Swap() {
   const { input: inputCurrency, output: outputCurrency } = useCurrencyFromUrl()
 
-  const inputValue = inputCurrency ? inputCurrency : 'ETH'
+  const inputValue = inputCurrency ? inputCurrency : 'OCTA'
   const outputValue = outputCurrency ? outputCurrency : 'OCS'
 
   const { currency: input, setCurrency: setInput } = useCurrency(inputValue)
