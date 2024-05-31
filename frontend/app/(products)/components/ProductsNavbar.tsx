@@ -18,15 +18,15 @@ const LINKS: { href: string; text: string }[] = [
     text: 'Swap',
   },
   {
-    href: '/pools',
+    href: 'octaswap.io/pools',
     text: 'Pools',
   },
   {
-    href: '/launchpad',
+    href: 'octaswap.io/launchpad',
     text: 'Launchpad',
   },
   {
-    href: '/vesting',
+    href: 'octaswap.io/claim',
     text: 'Vesting',
   },
 ]
@@ -39,30 +39,19 @@ function NavigationLink({ link }: { link: LinksType[number] }) {
 
   return (
     <Link href={link.href} legacyBehavior passHref>
-      <NavigationMenuLink
-        className={cn(navigationMenuTriggerStyle(), 'text-xl md:text-lg')}
-        active={isActive}
-      >
+      <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), 'text-xl md:text-lg')} active={isActive}>
         {link.text}
       </NavigationMenuLink>
     </Link>
   )
 }
 
-function Navigation({
-  links,
-  orientation,
-}: {
-  links: LinksType
-  orientation: 'horizontal' | 'vertical'
-}) {
+function Navigation({ links, orientation }: { links: LinksType; orientation: 'horizontal' | 'vertical' }) {
   const isNotMobile = useMediaQuery({ query: '(min-width: 768px)' })
 
   return (
     <NavigationMenu orientation={orientation}>
-      <NavigationMenuList
-        className={cn(!isNotMobile && 'flex-col items-start gap-y-3 space-x-0')}
-      >
+      <NavigationMenuList className={cn(!isNotMobile && 'flex-col items-start gap-y-3 space-x-0')}>
         {links.map((link) => (
           <NavigationMenuItem key={link.href}>
             <NavigationLink link={link} />
