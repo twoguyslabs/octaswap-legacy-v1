@@ -6,6 +6,7 @@ import { cookieToInitialState } from 'wagmi'
 import { config } from '@/wagmi.config'
 import Web3ModalProvider from '@/components/WalletConnect'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { Toaster } from '@/components/ui/sonner'
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '700', '800'] })
 
@@ -24,13 +25,9 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body className={poppins.className}>
         <Web3ModalProvider initialState={initialState}>
-          <ThemeProvider
-            attribute='class'
-            defaultTheme='dark'
-            enableSystem
-            disableTransitionOnChange
-          >
+          <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
             {children}
+            <Toaster />
           </ThemeProvider>
         </Web3ModalProvider>
       </body>

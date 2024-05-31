@@ -1,9 +1,5 @@
 'use client'
 
-export default function CSRWrapper({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function CSRWrapper({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }
