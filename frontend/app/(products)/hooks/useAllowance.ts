@@ -32,6 +32,9 @@ export default function useAllowance(
     address: tokenAddress,
     functionName: 'allowance',
     args: [myAddress, spender],
+    query: {
+      refetchInterval: 1000,
+    },
   })
 
   const isExceedBalance = tokenBalance ? tokenBalance < amount : false
