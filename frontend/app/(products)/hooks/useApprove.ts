@@ -9,14 +9,10 @@ import { useSimulateContract, useWaitForTransactionReceipt, useWriteContract } f
 import { Button } from '@/components/ui/button'
 
 export default function useApprove(
-  currency: Currency | undefined,
+  tokenAddress: `0x${string}` | undefined,
   spender: `0x${string}`,
   amount: string | bigint | undefined,
 ) {
-  const { token } = splitCurrencyType(currency)
-
-  const tokenAddress = token?.address as `0x${string}`
-
   const amt = amount ? (typeof amount === 'string' ? parseEther(amount) : amount) : BigInt(0)
 
   const { data: approvePayload } = useSimulateContract({

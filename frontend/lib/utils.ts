@@ -2,7 +2,7 @@ import { Base, Currency, Token } from '@/constants/currency'
 import { DECIMALS } from '@/constants/decimals'
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { isAddress, parseEther } from 'viem'
+import { isAddress, parseEther, zeroAddress } from 'viem'
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -110,6 +110,21 @@ function splitCurrencyType(currency: Currency | undefined) {
   return { token, native }
 }
 
+function sortCurrency(reserveA: bigint, tokenAddressA: string, reserveB: bigint, tokenAddressB: string) {
+  let reserve0: bigint
+  let reserve1: bigint
+
+  if (tokenAddressA < tokenAddressB) {
+    reserve0 = reserveA
+    reserve1 = reserveB
+  } else {
+    reserve0 = reserveB
+    reserve1 = reserveA
+  }
+
+  return { reserve0, reserve1 }
+}
+
 export {
   cn,
   nFormatter,
@@ -119,4 +134,5 @@ export {
   searchCurrencyInputBy,
   checkDuplicateCurrency,
   splitCurrencyType,
+  sortCurrency,
 }

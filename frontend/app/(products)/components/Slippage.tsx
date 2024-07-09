@@ -1,13 +1,12 @@
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible'
 import { Input } from '@/components/ui/input'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import CustomSwapSettingTrigger from './CustomSwapSettingTrigger'
-import styles from '../styles/swapsettings.module.css'
+import styles from '../styles/dexsettings.module.css'
 import { cn } from '@/lib/utils'
-import { Dispatch, SetStateAction, useContext, useState } from 'react'
-import useSlippage from '../../hooks/useSlippage'
+import { Dispatch, SetStateAction, useContext } from 'react'
 import { Percent, TriangleAlert } from 'lucide-react'
-import { SwapSettingsContext } from './SwapSettings'
+import { DexSettingsContext } from './DexSettings'
+import CustomSwapSettingTrigger from './CustomSwapSettingTrigger'
 
 function SlippageWarning({ description }: { description: string }) {
   return (
@@ -66,7 +65,7 @@ function SlippageTogglerGroup({
 }
 
 export default function Slippage() {
-  const { slippage, onSetSlippage } = useContext(SwapSettingsContext) as SwapSettingsContextType
+  const { slippage, onSetSlippage } = useContext(DexSettingsContext) as DexSettingsContextType
 
   const handleToggler = (e: string) => {
     if (e === 'auto') {

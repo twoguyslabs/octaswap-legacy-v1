@@ -5,9 +5,10 @@ import ProductsNavbar from './ProductsNavbar'
 import { useMediaQuery } from 'react-responsive'
 import { cn } from '@/lib/utils'
 import { useAccount } from 'wagmi'
+import ThemeToggler from '@/components/ThemeToggler'
 
 export default function Header() {
-  const { isConnected, address } = useAccount()
+  const { isConnected, isDisconnected, address } = useAccount()
   const isNotMobile = useMediaQuery({ query: '(min-width: 768px)' })
 
   return (
@@ -18,19 +19,15 @@ export default function Header() {
           {isNotMobile ? (
             <ProductsNavbar />
           ) : (
-            <div
-              className={cn(
-                'flex items-center gap-x-3',
-                isConnected && 'gap-x-0',
-              )}
-            >
+            <div className={cn('flex items-center gap-x-3', isConnected && 'gap-x-0')}>
               <w3m-button balance='hide' size='sm' />
               <ProductsNavbar />
             </div>
           )}
         </div>
         {isNotMobile && (
-          <div>
+          <div className={cn('flex items-center', isDisconnected && 'gap-x-2')}>
+            <ThemeToggler />
             <w3m-button balance='hide' size='sm' />
           </div>
         )}

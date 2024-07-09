@@ -13,7 +13,7 @@ function BalanceFixedAmount({
   const halfAmount = balance / BigInt(2)
 
   return (
-    <div className='space-x-2 pl-2 text-gray-300'>
+    <div className='space-x-2 pl-2 dark:text-gray-300'>
       {/* <button className='underline decoration-from-font' onClick={() => onSetAmount(balance / 4)}>
         25%
       </button> */}

@@ -1,14 +1,14 @@
 'use client'
 
-import SwapSettings from './components/SwapSettings'
+import DexSettings from '../components/DexSettings'
 import SwapBox from './components/SwapBox'
 import SwapButton from './components/SwapButton'
-import SwapCurrencyPlace from './components/SwapCurrencyPlace'
+import SwapCurrencyPlace from '../components/SwapCurrencyPlace'
 import { useState } from 'react'
 import CurrencyDrawer from './components/CurrencyDrawer'
 import useCurrency from '../hooks/useCurrency'
 import useCurrencyFromUrl from '../hooks/useCurrencyFromUrl'
-import useSwapAmounts from './hooks/useSwapAmounts'
+import useCurrencyAmounts from '../hooks/useCurrencyAmounts'
 import useSlippage from '../hooks/useSlippage'
 import useDeadline from '../hooks/useDeadline'
 import useSwap from './hooks/useSwap'
@@ -25,7 +25,7 @@ export default function Swap() {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
-  const { inputAmount, outputAmount, setInputAmount, setOutputAmount } = useSwapAmounts()
+  const { inputAmount, outputAmount, setInputAmount, setOutputAmount } = useCurrencyAmounts()
 
   const { slippage, setSlippage } = useSlippage()
   const { minutes, setMinutes, deadline } = useDeadline(inputAmount, outputAmount)
@@ -46,25 +46,31 @@ export default function Swap() {
   } = useSwap(inputAmount, outputAmount, slippage.percent, input.currency, output.currency, deadline)
 
   const { isPairAddress, pairAddress } = usePair(input.currency, output.currency)
+  const currentPairAddress = isPairAddress ? pairAddress : '0x595ee9dd6ca0c778dce1903c83c59e79336d1e93'
 
   return (
     <main>
       <div className='xl:mt-10 xl:flex xl:items-center xl:justify-around'>
-        <div>
-          <iframe
-            height='450'
-            width='650'
-            id='geckoterminal-embed'
-            title='GeckoTerminal Embed'
-            src={`https://www.geckoterminal.com/octaspace/pools/${isPairAddress ? pairAddress : '0x595ee9dd6ca0c778dce1903c83c59e79336d1e93'}?embed=1&info=0&swaps=0`}
-            frameBorder='0'
-            allow='clipboard-write'
-            allowFullScreen
-            className='hidden xl:block'
-          ></iframe>
+        <div className='hidden xl:block'>
+          {currentPairAddress ? (
+            <iframe
+              height='450'
+              width='650'
+              id='geckoterminal-embed'
+              title='GeckoTerminal Embed'
+              src={`https://www.geckoterminal.com/octaspace/pools/${currentPairAddress}?embed=1&info=0&swaps=0`}
+              frameBorder='0'
+              allow='clipboard-write'
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <p className='flex h-[450px] w-[650px] items-center justify-center'>Loading chart...</p>
+          )}
         </div>
-        <div className='shrink-0 space-y-2 px-2 py-5 min-[425px]:mx-auto min-[425px]:max-w-md md:py-16 xl:mx-0 xl:py-0'>
-          <SwapSettings slippage={slippage} onSetSlippage={setSlippage} minutes={minutes} onSetMinutes={setMinutes} />
+        <div className='shrink-0 space-y-2 px-2 py-5 min-[425px]:mx-auto min-[425px]:max-w-md min-[450px]:px-0 md:py-16 xl:mx-0 xl:py-0'>
+          <div className='text-right'>
+            <DexSettings slippage={slippage} onSetSlippage={setSlippage} minutes={minutes} onSetMinutes={setMinutes} />
+          </div>
           <div className='relative space-y-1'>
             <SwapBox
               isFetchingAmounts={isFetchingAmountsIn}

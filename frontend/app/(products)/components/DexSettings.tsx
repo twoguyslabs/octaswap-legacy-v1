@@ -6,11 +6,12 @@ import { FaGear } from 'react-icons/fa6'
 import { useMediaQuery } from 'react-responsive'
 import Slippage from './Slippage'
 import Deadline from './Deadline'
+import { Button } from '@/components/ui/button'
 
-export const SwapSettingsContext = createContext<SwapSettingsContextType | null>(null)
+export const DexSettingsContext = createContext<DexSettingsContextType | null>(null)
 
-function SwapSettingDesktop() {
-  const { isOpen, onHandleSetting } = useContext(SwapSettingsContext) as SwapSettingsContextType
+function DexSettingDesktop() {
+  const { isOpen, onHandleSetting } = useContext(DexSettingsContext) as DexSettingsContextType
 
   return (
     <Popover open={isOpen} onOpenChange={onHandleSetting}>
@@ -27,8 +28,8 @@ function SwapSettingDesktop() {
   )
 }
 
-function SwapSettingMobile() {
-  const { isOpen, onHandleSetting } = useContext(SwapSettingsContext) as SwapSettingsContextType
+function DexSettingMobile() {
+  const { isOpen, onHandleSetting } = useContext(DexSettingsContext) as DexSettingsContextType
 
   return (
     <Drawer open={isOpen} onOpenChange={onHandleSetting}>
@@ -46,12 +47,12 @@ function SwapSettingMobile() {
 }
 
 const GearButton = forwardRef<HTMLButtonElement, React.ComponentPropsWithRef<'button'>>((props, ref) => (
-  <button className='mr-2' ref={ref} {...props}>
+  <Button variant='ghost' size='icon' ref={ref} {...props}>
     <FaGear className='h-5 w-5' />
-  </button>
+  </Button>
 ))
 
-export default function SwapSettings({
+export default function DexSettings({
   slippage,
   onSetSlippage,
   minutes,
@@ -83,10 +84,10 @@ export default function SwapSettings({
   }
 
   return (
-    <SwapSettingsContext.Provider
+    <DexSettingsContext.Provider
       value={{ isOpen, onHandleSetting: handleSetting, slippage, onSetSlippage, minutes, onSetMinutes }}
     >
-      <div className='text-right'>{isNotMobile ? <SwapSettingDesktop /> : <SwapSettingMobile />}</div>
-    </SwapSettingsContext.Provider>
+      {isNotMobile ? <DexSettingDesktop /> : <DexSettingMobile />}
+    </DexSettingsContext.Provider>
   )
 }

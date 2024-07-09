@@ -7,19 +7,16 @@ import useWrapped from './useWrapped'
 import useCurrencyBalance from './useCurrencyBalance'
 
 export default function useAllowance(
-  currency: Currency | undefined,
+  tokenAddress: `0x${string}` | undefined,
   spender: `0x${string}`,
   amountToCompare: string | bigint | undefined,
 ) {
   const myAddress = useAddress()
   const wrapped = useWrapped()
 
-  const { token } = splitCurrencyType(currency)
+  const token = tokenAddress === wrapped ? undefined : tokenAddress
 
-  const address = token?.address as `0x${string}`
-  const tokenAddress = address === wrapped ? undefined : address
-
-  const tokenBalance = useCurrencyBalance(tokenAddress)
+  const tokenBalance = useCurrencyBalance(token)
 
   const amount = amountToCompare
     ? typeof amountToCompare === 'string'
@@ -29,7 +26,7 @@ export default function useAllowance(
 
   const { data: allowance } = useReadContract({
     abi: erc20Abi,
-    address: tokenAddress,
+    address: token,
     functionName: 'allowance',
     args: [myAddress, spender],
     query: {
@@ -40,5 +37,5 @@ export default function useAllowance(
   const isExceedBalance = tokenBalance ? tokenBalance < amount : false
   const isAllowance = allowance ? allowance >= amount : false
 
-  return tokenAddress ? isAllowance || isExceedBalance : true
+  return token ? isAllowance || isExceedBalance : true
 }

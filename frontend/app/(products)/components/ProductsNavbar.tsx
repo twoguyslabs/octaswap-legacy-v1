@@ -11,6 +11,7 @@ import { useMediaQuery } from 'react-responsive'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import ThemeToggler from '@/components/ThemeToggler'
 
 const LINKS: { href: string; text: string }[] = [
   {
@@ -18,8 +19,8 @@ const LINKS: { href: string; text: string }[] = [
     text: 'Swap',
   },
   {
-    href: 'https://octaswap.io/pools',
-    text: 'Pools',
+    href: '/liquidity',
+    text: 'Liquidity',
   },
   {
     href: 'https://octaswap.io/launchpad',
@@ -42,7 +43,11 @@ function NavigationLink({ link }: { link: LinksType[number] }) {
       <NavigationMenuLink
         className={cn(navigationMenuTriggerStyle(), 'text-xl md:text-lg')}
         active={isActive}
-        target='_blank'
+        target={
+          link.href === 'https://octaswap.io/launchpad' || link.href === 'https://octaswap.io/claim'
+            ? '_blank'
+            : '_self'
+        }
       >
         {link.text}
       </NavigationMenuLink>
@@ -54,7 +59,7 @@ function Navigation({ links, orientation }: { links: LinksType; orientation: 'ho
   const isNotMobile = useMediaQuery({ query: '(min-width: 768px)' })
 
   return (
-    <NavigationMenu orientation={orientation}>
+    <NavigationMenu orientation={orientation} className={cn(!isNotMobile && 'flex-none')}>
       <NavigationMenuList className={cn(!isNotMobile && 'flex-col items-start gap-y-3 space-x-0')}>
         {links.map((link) => (
           <NavigationMenuItem key={link.href}>
@@ -71,6 +76,8 @@ function Desktop({ links }: { links: LinksType }) {
 }
 
 function Mobile({ links }: { links: LinksType }) {
+  const isNotMobile = useMediaQuery({ query: '(min-width: 768px)' })
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -79,7 +86,10 @@ function Mobile({ links }: { links: LinksType }) {
         </button>
       </SheetTrigger>
       <SheetContent side='left'>
-        <Navigation links={links} orientation='vertical' />
+        <div className={cn(!isNotMobile && 'flex h-full flex-col justify-between')}>
+          <Navigation links={links} orientation='vertical' />
+          <ThemeToggler />
+        </div>
       </SheetContent>
     </Sheet>
   )

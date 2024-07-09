@@ -1,12 +1,12 @@
 import { Currency, CurrencyState } from '@/constants/currency'
 import { Dispatch, SetStateAction } from 'react'
 import { AiOutlineSync } from 'react-icons/ai'
-import useCurrencyFromUrl from '../../hooks/useCurrencyFromUrl'
+import useCurrencyFromUrl from '../hooks/useCurrencyFromUrl'
 import useCreateQueryString from '@/app/hooks/useCreateQueryString'
 import { splitCurrencyType } from '@/lib/utils'
 import { toast } from 'sonner'
 
-export default function SwapTokenPlace({
+export default function SwapCurrencyPlace({
   input,
   output,
   onSetInput,
@@ -27,7 +27,7 @@ export default function SwapTokenPlace({
 
   return (
     <button
-      className='border-background absolute right-[46%] top-[38.5%] rounded-lg border-4 bg-[#101424] p-1.5'
+      className='border-background dark:bg-secondary absolute right-[46%] top-[38.5%] rounded-lg border-4 p-1.5'
       onClick={handleSwap}
     >
       <AiOutlineSync className='h-5 w-5' />

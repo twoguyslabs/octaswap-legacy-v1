@@ -2,15 +2,19 @@ import useCreateQueryString from '@/app/hooks/useCreateQueryString'
 import { Currency } from '@/constants/currency'
 import { splitCurrencyType } from '@/lib/utils'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export default function useCurrencyFromUrl() {
+  const [input, setInput] = useState('')
+  const [output, setOutput] = useState('')
+
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
   const createQueryString = useCreateQueryString()
 
-  const input = searchParams.get('inputCurrency')
-  const output = searchParams.get('outputCurrency')
+  const inputCurrency = searchParams.get('inputCurrency')
+  const outputCurrency = searchParams.get('outputCurrency')
 
   const handleReplace = (queryString: string, currency: Currency | undefined) => {
     const { token, native } = splitCurrencyType(currency)
@@ -33,6 +37,13 @@ export default function useCurrencyFromUrl() {
 
     router.replace(pathname + '?' + current.toString())
   }
+
+  useEffect(() => {
+    if (inputCurrency && outputCurrency) {
+      setInput(inputCurrency)
+      setOutput(outputCurrency)
+    }
+  }, [inputCurrency, outputCurrency])
 
   return { input, output, handleReplace, handleReplaceAll }
 }

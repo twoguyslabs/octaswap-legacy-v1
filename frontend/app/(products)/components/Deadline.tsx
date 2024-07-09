@@ -1,13 +1,13 @@
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible'
-import CustomSwapSettingTrigger from './CustomSwapSettingTrigger'
-import styles from '../styles/swapsettings.module.css'
+import styles from '../styles/dexsettings.module.css'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { useContext } from 'react'
-import { SwapSettingsContext } from './SwapSettings'
+import CustomSwapSettingTrigger from './CustomSwapSettingTrigger'
+import { DexSettingsContext } from './DexSettings'
 
 function DeadlineInput() {
-  const { minutes, onSetMinutes } = useContext(SwapSettingsContext) as SwapSettingsContextType
+  const { minutes, onSetMinutes } = useContext(DexSettingsContext) as DexSettingsContextType
 
   return (
     <div className='relative'>

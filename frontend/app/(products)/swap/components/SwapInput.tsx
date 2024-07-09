@@ -18,15 +18,26 @@ export default function SwapInput({
       : currencyAmount
     : ''
 
-  return isFetchingAmounts ? (
-    <SpokeSpinner size='lg' />
-  ) : (
+  return (
     <Input
       type='text'
       placeholder='0'
-      className='bg-secondary border-transparent py-7 text-2xl focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-[#101424]'
+      className='dark:bg-secondary/5 bg-secondary border-transparent py-7 text-2xl focus-visible:ring-0 focus-visible:ring-offset-0'
       onChange={(e) => onSetAmount(e.target.value)}
       value={amount}
     />
   )
+
+  // IS FETCHING KONTOL, NGODING KONTOL, MENDING GW MAEN HOK AJG
+  // return isFetchingAmounts ? (
+  //   <SpokeSpinner size='lg' />
+  // ) : (
+  //   <Input
+  //     type='text'
+  //     placeholder='0'
+  //     className='bg-secondary border-transparent py-7 text-2xl focus-visible:ring-0 focus-visible:ring-offset-0'
+  //     onChange={(e) => onSetAmount(e.target.value)}
+  //     value={amount}
+  //   />
+  // )
 }
