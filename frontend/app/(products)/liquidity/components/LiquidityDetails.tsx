@@ -19,19 +19,30 @@ export default function LiquidityDetails({
   quoteInPerOne: bigint | undefined
   quoteOutPerOne: bigint | undefined
 }) {
-  const fmtQuoteIn = quoteInPerOne
-    ? quoteInPerOne > parseEther('1')
-      ? formatEther(quoteInPerOne).split('.')[0]
-      : Number(formatEther(quoteInPerOne)).toFixed(10)
-    : 0
-
-  const fmtQuoteOut = quoteOutPerOne
-    ? quoteOutPerOne > parseEther('1')
-      ? Number(formatEther(quoteOutPerOne)).toFixed(3)
-      : Number(formatEther(quoteOutPerOne)).toFixed(10)
-    : 0
-
   const { pairAddress, isPairAddress } = usePair(currencyA, currencyB)
+
+  const amountIn = amountA ? (typeof amountA === 'string' ? Number(amountA) : Number(formatEther(amountA))) : 0
+  const amountOut = amountB ? (typeof amountB === 'string' ? Number(amountB) : Number(formatEther(amountB))) : 0
+
+  const fmtQuoteIn = isPairAddress
+    ? quoteInPerOne
+      ? quoteInPerOne > parseEther('1')
+        ? Number(formatEther(quoteInPerOne)).toFixed(3)
+        : Number(formatEther(quoteInPerOne)).toFixed(3)
+      : 0
+    : amountOut && amountIn
+      ? (amountOut / amountIn).toFixed(3)
+      : 0
+
+  const fmtQuoteOut = isPairAddress
+    ? quoteOutPerOne
+      ? quoteOutPerOne > parseEther('1')
+        ? Number(formatEther(quoteOutPerOne)).toFixed(3)
+        : Number(formatEther(quoteOutPerOne)).toFixed(3)
+      : 0
+    : amountIn && amountOut
+      ? (amountIn / amountOut).toFixed(3)
+      : 0
 
   const { totalLiquidityTokenToAdd } = useLiquidityToken(currencyA, currencyB, amountA, amountB)
   const poolShare = usePoolShare(pairAddress, totalLiquidityTokenToAdd)

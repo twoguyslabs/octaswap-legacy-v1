@@ -10,9 +10,6 @@ export default function useCurrencyAmounts(currencyA?: Currency | undefined, cur
   const { isPairAddress, pairAddress } = usePair(currencyA, currencyB)
   const { reserve0, reserve1 } = usePairReserves({ pairAddress })
 
-  console.log(reserve0)
-  console.log(reserve1)
-
   const isValidAmount = (amount: string | bigint): boolean => {
     if (typeof amount === 'bigint') {
       return true // Assume bigint values are always valid
