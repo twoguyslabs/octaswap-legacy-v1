@@ -19,7 +19,7 @@ export default function useLiquidityToken(
   const outputAmount = typeof amountB === 'bigint' ? formatEther(amountB) : amountB
 
   const { pairAddress, isPairAddress } = usePair(currencyA, currencyB)
-  const { reserve0, reserve1 } = usePairReserves({ currencyA, currencyB })
+  const { reserve0, reserve1 } = usePairReserves({ pairAddress })
   const pairTotalSupply = usePairTotalSupply(pairAddress)
 
   const newlyMintedLp = Math.sqrt(Number(inputAmount) * Number(outputAmount))

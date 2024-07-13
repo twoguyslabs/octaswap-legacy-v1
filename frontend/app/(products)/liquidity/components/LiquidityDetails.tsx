@@ -36,7 +36,7 @@ export default function LiquidityDetails({
   const { totalLiquidityTokenToAdd } = useLiquidityToken(currencyA, currencyB, amountA, amountB)
   const poolShare = usePoolShare(pairAddress, totalLiquidityTokenToAdd)
 
-  const fmtPoolShare = poolShare ? (poolShare < 0.01 ? '<0.01' : poolShare.toFixed(3)) : 0
+  const fmtPoolShare = poolShare ? (poolShare < 0.01 ? '<0.01' : (poolShare * 100).toFixed(3)) : 0
 
   return (
     <div className='my-5 space-y-3 rounded-lg border'>

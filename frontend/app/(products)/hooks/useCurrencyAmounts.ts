@@ -1,12 +1,17 @@
 import { useState } from 'react'
 import usePair from './usePair'
 import { Currency } from '@/constants/currency'
+import usePairReserves from './usePairReserves'
 
 export default function useCurrencyAmounts(currencyA?: Currency | undefined, currencyB?: Currency | undefined) {
   const [inputAmount, setInputAmount] = useState<string | bigint>('')
   const [outputAmount, setOutputAmount] = useState<string | bigint>('')
 
-  const { isPairAddress } = usePair(currencyA, currencyB)
+  const { isPairAddress, pairAddress } = usePair(currencyA, currencyB)
+  const { reserve0, reserve1 } = usePairReserves({ pairAddress })
+
+  console.log(reserve0)
+  console.log(reserve1)
 
   const isValidAmount = (amount: string | bigint): boolean => {
     if (typeof amount === 'bigint') {
@@ -23,7 +28,7 @@ export default function useCurrencyAmounts(currencyA?: Currency | undefined, cur
       return // Exit the function if the amount is not valid
     }
 
-    if (isPairAddress && outputAmount) {
+    if (isPairAddress && reserve0 && reserve1 && outputAmount) {
       setOutputAmount('')
       setInputAmount(amount)
     } else {
@@ -37,7 +42,7 @@ export default function useCurrencyAmounts(currencyA?: Currency | undefined, cur
       return // Exit the function if the amount is not valid
     }
 
-    if (isPairAddress && inputAmount) {
+    if (isPairAddress && reserve0 && reserve1 && inputAmount) {
       setInputAmount('')
       setOutputAmount(amount)
     } else {
