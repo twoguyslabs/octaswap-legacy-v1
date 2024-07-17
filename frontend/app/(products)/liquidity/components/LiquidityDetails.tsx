@@ -31,7 +31,7 @@ export default function LiquidityDetails({
         : Number(formatEther(quoteInPerOne)).toFixed(3)
       : 0
     : amountOut && amountIn
-      ? (amountOut / amountIn).toFixed(3)
+      ? (amountIn / amountOut).toFixed(3)
       : 0
 
   const fmtQuoteOut = isPairAddress
@@ -41,7 +41,7 @@ export default function LiquidityDetails({
         : Number(formatEther(quoteOutPerOne)).toFixed(3)
       : 0
     : amountIn && amountOut
-      ? (amountIn / amountOut).toFixed(3)
+      ? (amountOut / amountIn).toFixed(3)
       : 0
 
   const { totalLiquidityTokenToAdd } = useLiquidityToken(currencyA, currencyB, amountA, amountB)
