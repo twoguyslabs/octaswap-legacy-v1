@@ -1,3 +1,6 @@
+'use client'
+
+import Logo from '@/components/Logo'
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -7,11 +10,12 @@ import {
 } from '@/components/ui/navigation-menu'
 import Link from 'next/link'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { useMediaQuery } from 'react-responsive'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import ThemeToggler from '@/components/ThemeToggler'
+import { Dispatch, SetStateAction, useState } from 'react'
+import { useAccount } from 'wagmi'
 
 const LINKS: { href: string; text: string }[] = [
   {
@@ -21,6 +25,10 @@ const LINKS: { href: string; text: string }[] = [
   {
     href: '/liquidity',
     text: 'Liquidity',
+  },
+  {
+    href: '/staking',
+    text: 'Staking',
   },
   {
     href: 'https://octaswap.io/launchpad',
@@ -34,7 +42,7 @@ const LINKS: { href: string; text: string }[] = [
 
 type LinksType = typeof LINKS
 
-function NavigationLink({ link }: { link: LinksType[number] }) {
+function NavigationLink({ link, onOpen }: { link: LinksType[number]; onOpen?: Dispatch<SetStateAction<boolean>> }) {
   const pathname = usePathname()
   const isActive = link.href === pathname
 
@@ -48,6 +56,7 @@ function NavigationLink({ link }: { link: LinksType[number] }) {
             ? '_blank'
             : '_self'
         }
+        onClick={() => onOpen?.(false)}
       >
         {link.text}
       </NavigationMenuLink>
@@ -55,15 +64,21 @@ function NavigationLink({ link }: { link: LinksType[number] }) {
   )
 }
 
-function Navigation({ links, orientation }: { links: LinksType; orientation: 'horizontal' | 'vertical' }) {
-  const isNotMobile = useMediaQuery({ query: '(min-width: 768px)' })
-
+function Navigation({
+  links,
+  orientation,
+  onOpen,
+}: {
+  links: LinksType
+  orientation: 'horizontal' | 'vertical'
+  onOpen?: Dispatch<SetStateAction<boolean>>
+}) {
   return (
-    <NavigationMenu orientation={orientation} className={cn(!isNotMobile && 'flex-none')}>
-      <NavigationMenuList className={cn(!isNotMobile && 'flex-col items-start gap-y-3 space-x-0')}>
+    <NavigationMenu orientation={orientation} className='flex-none'>
+      <NavigationMenuList className='flex-col items-start gap-y-3 space-x-0 md:flex-row'>
         {links.map((link) => (
           <NavigationMenuItem key={link.href}>
-            <NavigationLink link={link} />
+            <NavigationLink link={link} onOpen={onOpen} />
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
@@ -71,23 +86,29 @@ function Navigation({ links, orientation }: { links: LinksType; orientation: 'ho
   )
 }
 
-function Desktop({ links }: { links: LinksType }) {
-  return <Navigation links={links} orientation='horizontal' />
+function Desktop({ links, orientation }: { links: LinksType; orientation: 'horizontal' | 'vertical' }) {
+  return <Navigation links={links} orientation={orientation} />
 }
 
-function Mobile({ links }: { links: LinksType }) {
-  const isNotMobile = useMediaQuery({ query: '(min-width: 768px)' })
-
+function Mobile({
+  links,
+  isOpen,
+  onOpen,
+}: {
+  links: LinksType
+  isOpen: boolean
+  onOpen: Dispatch<SetStateAction<boolean>>
+}) {
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={onOpen}>
       <SheetTrigger asChild>
         <button>
           <RxHamburgerMenu className='h-7 w-7' />
         </button>
       </SheetTrigger>
       <SheetContent side='left'>
-        <div className={cn(!isNotMobile && 'flex h-full flex-col justify-between')}>
-          <Navigation links={links} orientation='vertical' />
+        <div className='flex h-full flex-col justify-between'>
+          <Navigation links={links} orientation='vertical' onOpen={onOpen} />
           <ThemeToggler />
         </div>
       </SheetContent>
@@ -96,7 +117,26 @@ function Mobile({ links }: { links: LinksType }) {
 }
 
 export default function ProductsNavbar() {
-  const isNotMobile = useMediaQuery({ query: '(min-width: 768px)' })
-
-  return isNotMobile ? <Desktop links={LINKS} /> : <Mobile links={LINKS} />
+  const [isOpen, setIsOpen] = useState(false)
+  const { isDisconnected } = useAccount()
+  return (
+    <NavigationMenu className='max-w-full p-5'>
+      <div className='flex w-full items-center justify-between'>
+        <div className='md:flex md:items-center md:gap-x-5'>
+          <Logo width={35} height={35} />
+          <div className='hidden md:block'>
+            <Desktop links={LINKS} orientation='horizontal' />
+          </div>
+        </div>
+        <div className={cn('hidden md:flex md:items-center', isDisconnected && 'md:gap-x-3')}>
+          <ThemeToggler />
+          <w3m-button balance='hide' size='sm' />
+        </div>
+        <div className='flex items-center gap-x-3 md:hidden'>
+          <w3m-button balance='hide' size='sm' />
+          <Mobile links={LINKS} isOpen={isOpen} onOpen={setIsOpen} />
+        </div>
+      </div>
+    </NavigationMenu>
+  )
 }

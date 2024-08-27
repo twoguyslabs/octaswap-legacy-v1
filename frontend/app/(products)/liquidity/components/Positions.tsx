@@ -1,16 +1,10 @@
-import { useEffect, useState } from 'react'
-import useAllPairs from '../../hooks/useAllPairs'
 import useFindMyLiquidityPositions from '../../hooks/useFindMyLiquidityPositions'
-import usePairIndex from '../../hooks/usePairIndex'
 import Image from 'next/image'
 import { ADDRESS_TO_TOKEN_LOGO } from '@/constants/logos'
-import { useReadContract } from 'wagmi'
-import { erc20Abi, formatEther } from 'viem'
+import { formatEther } from 'viem'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Button } from '@/components/ui/button'
-import { ArrowDown, ChevronDown, CircleHelp } from 'lucide-react'
-import usePairReserves from '../../hooks/usePairReserves'
-import usePoolShare from '../hooks/usePoolShare'
+import { ChevronDown, CircleHelp } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Positions() {

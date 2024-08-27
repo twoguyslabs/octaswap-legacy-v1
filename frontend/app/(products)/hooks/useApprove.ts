@@ -1,12 +1,6 @@
-import useTranscationState from '@/app/hooks/useTranscationState'
-import { Currency } from '@/constants/currency'
-import { splitCurrencyType } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import { useEffect } from 'react'
 import { toast } from 'sonner'
 import { erc20Abi, formatEther, parseEther } from 'viem'
 import { useSimulateContract, useWaitForTransactionReceipt, useWriteContract } from 'wagmi'
-import { Button } from '@/components/ui/button'
 
 export default function useApprove(
   tokenAddress: `0x${string}` | undefined,

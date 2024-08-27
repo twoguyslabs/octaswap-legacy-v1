@@ -3,7 +3,6 @@
 import { Button } from '@/components/ui/button'
 import { ArrowDown, ArrowLeft, CircleHelp, PlusIcon } from 'lucide-react'
 import Link from 'next/link'
-import DexSettings from '../../components/DexSettings'
 import { Slider } from '@/components/ui/slider'
 import { useState } from 'react'
 import useCurrencyFromUrl from '../../hooks/useCurrencyFromUrl'
@@ -15,7 +14,6 @@ import useErcPairBalance from '../../hooks/useErcPairBalance'
 import useApprove from '../../hooks/useApprove'
 import { ROUTER_ADDRESS } from '@/contracts/octaswapRouter'
 import useRemoveLiquidityType from '../hooks/useRemoveLiquidityType'
-import { formatEther, parseEther } from 'viem'
 import useAllowance from '../../hooks/useAllowance'
 
 export default function Remove() {

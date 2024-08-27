@@ -1,6 +1,4 @@
-import { Currency } from '@/constants/currency'
-import { splitCurrencyType } from '@/lib/utils'
-import { erc20Abi, formatEther, parseEther } from 'viem'
+import { erc20Abi, parseEther } from 'viem'
 import { useReadContract } from 'wagmi'
 import useAddress from '../../hooks/useAddress'
 import useWrapped from './useWrapped'

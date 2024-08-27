@@ -1,8 +1,6 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { ArrowLeft, PlusIcon } from 'lucide-react'
 import Link from 'next/link'
 import useCurrencyFromUrl from '../../hooks/useCurrencyFromUrl'
 import useCurrency from '../../hooks/useCurrency'
@@ -13,10 +11,10 @@ import useDeadline from '../../hooks/useDeadline'
 import useLiquidity from '../hooks/useLiquidity'
 import DexSettings from '../../components/DexSettings'
 import SwapBox from '../../swap/components/SwapBox'
-import SwapCurrencyPlace from '../../components/SwapCurrencyPlace'
-import CurrencyDrawer from '../../swap/components/CurrencyDrawer'
 import LiquidityButton from '../components/LiquidityButton'
 import LiquidityDetails from '../components/LiquidityDetails'
+import { ArrowLeft, PlusIcon } from 'lucide-react'
+import CurrencyDrawer from '../../swap/components/CurrencyDrawer'
 
 export default function Add() {
   const { input: inputCurrency, output: outputCurrency } = useCurrencyFromUrl()
@@ -40,8 +38,6 @@ export default function Add() {
   const {
     quoteIn,
     quoteOut,
-    isFetchingQuoteIn,
-    isFetchingQuoteOut,
     quoteInPerOne,
     quoteOutPerOne,
     isRouterAllowanceA,
@@ -50,8 +46,6 @@ export default function Add() {
     isApprovePayloadB,
     isApprovingA,
     isApprovingB,
-    isApproveTxSuccessA,
-    isApproveTxSuccessB,
     isLiquidityType,
     isAddingLiquidity,
     handleOnApproveA,
@@ -80,7 +74,6 @@ export default function Add() {
             </div>
             <div className='relative'>
               <SwapBox
-                isFetchingAmounts={isFetchingQuoteIn}
                 currencyAmount={inputAmount || quoteIn}
                 onSetAmount={setInputAmount}
                 currency={input.currency}
@@ -93,7 +86,6 @@ export default function Add() {
                 </button>
               </div>
               <SwapBox
-                isFetchingAmounts={isFetchingQuoteOut}
                 currencyAmount={outputAmount || quoteOut}
                 onSetAmount={setOutputAmount}
                 currency={output.currency}
@@ -129,8 +121,6 @@ export default function Add() {
             isApprovePayloadB={isApprovePayloadB}
             isApprovingA={isApprovingA}
             isApprovingB={isApprovingB}
-            isApproveTxSuccessA={isApproveTxSuccessA}
-            isApproveTxSuccessB={isApproveTxSuccessB}
             isLiquidityType={isLiquidityType}
             isAddingLiquidity={isAddingLiquidity}
             onHandleApproveA={handleOnApproveA}

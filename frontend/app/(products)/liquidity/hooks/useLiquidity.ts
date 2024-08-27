@@ -30,14 +30,12 @@ export default function useLiquidity(
     isApprovePayload: isApprovePayloadA,
     handleOnApprove: handleOnApproveA,
     isApproving: isApprovingA,
-    isApproveTxSuccess: isApproveTxSuccessA,
   } = useApprove(addressA, ROUTER_ADDRESS, inputAmount || quoteIn)
 
   const {
     isApprovePayload: isApprovePayloadB,
     handleOnApprove: handleOnApproveB,
     isApproving: isApprovingB,
-    isApproveTxSuccess: isApproveTxSuccessB,
   } = useApprove(addressB, ROUTER_ADDRESS, outputAmount || quoteOut)
 
   const { isLiquidityType, isAddingLiquidity, handleOnAdd } = useLiquidityType(
@@ -64,8 +62,6 @@ export default function useLiquidity(
     isApprovePayloadB,
     isApprovingA,
     isApprovingB,
-    isApproveTxSuccessA,
-    isApproveTxSuccessB,
     isLiquidityType,
     isAddingLiquidity,
     handleOnApproveA,

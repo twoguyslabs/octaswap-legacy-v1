@@ -1,5 +1,5 @@
-import { useAccount, useBalance, useReadContract, useReadContracts } from 'wagmi'
-import { erc20Abi, formatEther } from 'viem'
+import { useAccount, useBalance, useReadContract } from 'wagmi'
+import { erc20Abi } from 'viem'
 import { useEffect, useState } from 'react'
 
 export default function useCurrencyBalance(tokenAddress?: string) {

@@ -3,7 +3,6 @@ import { ROUTER_ABI, ROUTER_ADDRESS } from '@/contracts/octaswapRouter'
 import { useSimulateContract, useWriteContract } from 'wagmi'
 import useCurrencyAddresses from '../../hooks/useCurrencyAddresses'
 import useAddress from '@/app/hooks/useAddress'
-import { parseEther } from 'viem'
 import useWrapped from '../../hooks/useWrapped'
 import { toast } from 'sonner'
 

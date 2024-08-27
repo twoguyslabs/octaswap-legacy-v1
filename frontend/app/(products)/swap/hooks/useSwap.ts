@@ -16,12 +16,7 @@ export default function useSwap(
 ) {
   const { addressA } = useCurrencyAddresses(currencyA, currencyB)
 
-  const { amountsIn, amountsOut, isFetchingAmountsIn, isFetchingAmountsOut } = useSwapRate(
-    inputAmount,
-    outputAmount,
-    currencyA,
-    currencyB,
-  )
+  const { amountsIn, amountsOut } = useSwapRate(inputAmount, outputAmount, currencyA, currencyB)
 
   const isRouterAllowance = useAllowance(addressA, ROUTER_ADDRESS, inputAmount || amountsIn)
 
@@ -45,8 +40,6 @@ export default function useSwap(
   return {
     amountsIn,
     amountsOut,
-    isFetchingAmountsIn,
-    isFetchingAmountsOut,
     isRouterAllowance,
     isApprovePayload,
     isApproving,

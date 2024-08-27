@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button'
 import { Currency } from '@/constants/currency'
 import usePair from '../../hooks/usePair'
 import useCurrencyAddresses from '../../hooks/useCurrencyAddresses'
-import useWrappedPair from '../../hooks/useWrappedPair'
 import useWrapped from '../../hooks/useWrapped'
 
 export default function LiquidityButton({
@@ -14,8 +13,6 @@ export default function LiquidityButton({
   isApprovePayloadB,
   isApprovingA,
   isApprovingB,
-  isApproveTxSuccessA,
-  isApproveTxSuccessB,
   isLiquidityType,
   isAddingLiquidity,
   onHandleApproveA,
@@ -30,8 +27,6 @@ export default function LiquidityButton({
   isApprovePayloadB: boolean
   isApprovingA: boolean
   isApprovingB: boolean
-  isApproveTxSuccessA: boolean
-  isApproveTxSuccessB: boolean
   isLiquidityType: boolean
   isAddingLiquidity: boolean
   onHandleApproveA: () => void

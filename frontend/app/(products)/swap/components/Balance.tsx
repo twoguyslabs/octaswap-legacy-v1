@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils'
 import useCurrencyBalance from '../../hooks/useCurrencyBalance'
-import numbro from 'numbro'
 import { formatEther, parseEther } from 'viem'
 
 function BalanceFixedAmount({

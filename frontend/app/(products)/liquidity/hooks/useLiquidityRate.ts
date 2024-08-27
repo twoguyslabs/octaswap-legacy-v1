@@ -6,7 +6,6 @@ import { sortCurrency } from '@/lib/utils'
 import useCurrencyAddresses from '../../hooks/useCurrencyAddresses'
 import usePairReserves from '../../hooks/usePairReserves'
 import usePair from '../../hooks/usePair'
-import useClient from '../../hooks/useClient'
 
 export default function useLiquidityRate(
   amountA: string | bigint,

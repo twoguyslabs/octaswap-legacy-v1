@@ -1,9 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Currency } from '@/constants/currency'
-import { splitCurrencyType } from '@/lib/utils'
-import useWrapped from '../../hooks/useWrapped'
 import useCurrencyAddresses from '../../hooks/useCurrencyAddresses'
-import useCurrencyFromUrl from '../../hooks/useCurrencyFromUrl'
 import usePair from '../../hooks/usePair'
 import useWrappedPair from '../../hooks/useWrappedPair'
 
@@ -13,7 +10,6 @@ export default function SwapButton({
   isRouterAllowance,
   isApprovePayload,
   isApproving,
-  isApproveTxSuccess,
   isTradeType,
   isSwapping,
   onApprove,
@@ -24,7 +20,6 @@ export default function SwapButton({
   isRouterAllowance: boolean
   isApprovePayload: boolean
   isApproving: boolean
-  isApproveTxSuccess: boolean
   isTradeType: boolean
   isSwapping: boolean
   onApprove: () => void

@@ -1,16 +1,11 @@
-import { FACTORY_ABI, FACTORY_ADDRESS } from '@/contracts/octaswapFactory'
 import { useEffect, useState } from 'react'
 import { useReadContract } from 'wagmi'
-import { PAIR_ERC_ABI } from '@/contracts/pairerc'
-import useAddress from '@/app/hooks/useAddress'
 import useAllPairs from './useAllPairs'
 import useErcPairBalance from './useErcPairBalance'
 import usePairIndex from './usePairIndex'
 import usePoolShare from '../liquidity/hooks/usePoolShare'
 import { erc20Abi, formatEther } from 'viem'
-import { PAIR_ABI } from '@/contracts/pair'
 import usePairTokens from './usePairTokens'
-import usePairReserves from './usePairReserves'
 import usePairTokensReserve from './usePairTokensReserve'
 
 export default function useFindMyliquidityPosition() {

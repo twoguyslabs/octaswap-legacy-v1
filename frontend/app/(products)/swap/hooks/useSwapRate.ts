@@ -1,10 +1,7 @@
 import { Currency } from '@/constants/currency'
-import { NATIVE_TO_WRAPPED } from '@/constants/wrapped'
-import { splitCurrencyType } from '@/lib/utils'
 import { parseEther } from 'viem'
-import { useChainId, useReadContract, useReadContracts } from 'wagmi'
+import { useReadContract } from 'wagmi'
 import useAddresses from '../../hooks/useCurrencyAddresses'
-import { DECIMALS } from '@/constants/decimals'
 import { ROUTER_ABI, ROUTER_ADDRESS } from '@/contracts/octaswapRouter'
 import useWrappedPair from '../../hooks/useWrappedPair'
 
@@ -26,7 +23,7 @@ export default function useSwapRate(
     address: ROUTER_ADDRESS,
   } as const
 
-  const { data: getAmountsIn, isFetching: isFetchingAmountsIn } = useReadContract({
+  const { data: getAmountsIn } = useReadContract({
     ...config,
     functionName: 'getAmountsIn',
     args: [output, [addressA, addressB]],
@@ -35,7 +32,7 @@ export default function useSwapRate(
     },
   })
 
-  const { data: getAmountsOut, isFetching: isFetchingAmountsOut } = useReadContract({
+  const { data: getAmountsOut } = useReadContract({
     ...config,
     functionName: 'getAmountsOut',
     args: [input, [addressA, addressB]],
@@ -47,5 +44,5 @@ export default function useSwapRate(
   const amountsIn = isWrappedPair ? output : getAmountsIn?.[0]
   const amountsOut = isWrappedPair ? input : getAmountsOut?.[1]
 
-  return { amountsIn, amountsOut, isFetchingAmountsIn, isFetchingAmountsOut }
+  return { amountsIn, amountsOut }
 }

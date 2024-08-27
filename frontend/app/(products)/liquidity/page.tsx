@@ -2,10 +2,6 @@
 
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import useAllPairs from '../hooks/useAllPairs'
-import usePairIndex from '../hooks/usePairIndex'
-import useFindMyLiquidityPositions from '../hooks/useFindMyLiquidityPositions'
-import { useEffect } from 'react'
 import Positions from './components/Positions'
 import useFindMyliquidityPosition from '../hooks/useFindMyLiquidityPositions'
 

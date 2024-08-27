@@ -12,7 +12,7 @@ import useCurrencyAmounts from '../hooks/useCurrencyAmounts'
 import useSlippage from '../hooks/useSlippage'
 import useDeadline from '../hooks/useDeadline'
 import useSwap from './hooks/useSwap'
-import usePair from '../hooks/usePair'
+import Chart from './components/Chart'
 
 export default function Swap() {
   const { input: inputCurrency, output: outputCurrency } = useCurrencyFromUrl()
@@ -33,8 +33,6 @@ export default function Swap() {
   const {
     amountsIn,
     amountsOut,
-    isFetchingAmountsIn,
-    isFetchingAmountsOut,
     isRouterAllowance,
     isApprovePayload,
     isApproving,
@@ -45,35 +43,16 @@ export default function Swap() {
     handleOnSwap,
   } = useSwap(inputAmount, outputAmount, slippage.percent, input.currency, output.currency, deadline)
 
-  const { isPairAddress, pairAddress } = usePair(input.currency, output.currency)
-  const currentPairAddress = isPairAddress ? pairAddress : '0x595ee9dd6ca0c778dce1903c83c59e79336d1e93'
-
   return (
     <main>
       <div className='xl:mt-10 xl:flex xl:items-center xl:justify-around'>
-        <div className='hidden xl:block'>
-          {currentPairAddress ? (
-            <iframe
-              height='450'
-              width='650'
-              id='geckoterminal-embed'
-              title='GeckoTerminal Embed'
-              src={`https://www.geckoterminal.com/octaspace/pools/${currentPairAddress}?embed=1&info=0&swaps=0`}
-              frameBorder='0'
-              allow='clipboard-write'
-              allowFullScreen
-            ></iframe>
-          ) : (
-            <p className='flex h-[450px] w-[650px] items-center justify-center'>Loading chart...</p>
-          )}
-        </div>
+        <Chart currencyA={input.currency} currencyB={output.currency} />
         <div className='shrink-0 space-y-2 px-2 py-5 min-[425px]:mx-auto min-[425px]:max-w-md min-[450px]:px-0 md:py-16 xl:mx-0 xl:py-0'>
           <div className='text-right'>
             <DexSettings slippage={slippage} onSetSlippage={setSlippage} minutes={minutes} onSetMinutes={setMinutes} />
           </div>
           <div className='relative space-y-1'>
             <SwapBox
-              isFetchingAmounts={isFetchingAmountsIn}
               currencyAmount={inputAmount || amountsIn}
               onSetAmount={setInputAmount}
               currency={input.currency}
@@ -87,7 +66,6 @@ export default function Swap() {
               onSetOutput={setOutput}
             />
             <SwapBox
-              isFetchingAmounts={isFetchingAmountsOut}
               currencyAmount={outputAmount || amountsOut}
               onSetAmount={setOutputAmount}
               currency={output.currency}
@@ -111,7 +89,6 @@ export default function Swap() {
             isRouterAllowance={isRouterAllowance}
             isApprovePayload={isApprovePayload}
             isApproving={isApproving}
-            isApproveTxSuccess={isApproveTxSuccess}
             isTradeType={isTradeType}
             isSwapping={isSwapping}
             onApprove={handleOnApprove}

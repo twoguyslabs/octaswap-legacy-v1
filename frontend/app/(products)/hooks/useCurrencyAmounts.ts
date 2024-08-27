@@ -12,7 +12,7 @@ export default function useCurrencyAmounts(currencyA?: Currency | undefined, cur
 
   const isValidAmount = (amount: string | bigint): boolean => {
     if (typeof amount === 'bigint') {
-      return true // Assume bigint values are always valid
+      return true
     }
 
     const regex = /^[0-9.]*$/
@@ -22,7 +22,7 @@ export default function useCurrencyAmounts(currencyA?: Currency | undefined, cur
   const handleInputAmount = (amount: string | bigint) => {
     if (!isValidAmount(amount)) {
       console.error('Invalid input amount')
-      return // Exit the function if the amount is not valid
+      return
     }
 
     if (isPairAddress && reserve0 && reserve1 && outputAmount) {
