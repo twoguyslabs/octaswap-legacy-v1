@@ -36,3 +36,11 @@ type DexSettingsContextType = {
   minutes: number
   onSetMinutes: Dispatch<SetStateAction<number>>
 }
+
+interface Tier {
+  name: string
+  minAmount: bigint
+  maxAmount: bigint
+  lockDuration: bigint
+  rewardsRate: bigint
+}

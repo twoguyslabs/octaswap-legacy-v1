@@ -125,6 +125,20 @@ function sortCurrency(reserveA: bigint, tokenAddressA: string, reserveB: bigint,
   return { reserve0, reserve1 }
 }
 
+export function calculateLockDuration(lockDurationInSeconds: number, lastUpdatedTimestamp: number) {
+  const currentTimestamp = Math.floor(Date.now() / 1000)
+  const remainingLockDuration = Math.max(0, lastUpdatedTimestamp + lockDurationInSeconds - currentTimestamp)
+  const remainingLockDays = Math.ceil(remainingLockDuration / (24 * 60 * 60))
+
+  const elapsedTime = currentTimestamp - lastUpdatedTimestamp
+  const progressPercentage = Math.min(100, Math.max(0, (elapsedTime / lockDurationInSeconds) * 100))
+
+  return {
+    remainingLockDays,
+    progressPercentage,
+  }
+}
+
 export {
   cn,
   nFormatter,

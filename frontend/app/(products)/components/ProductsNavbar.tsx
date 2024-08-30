@@ -75,7 +75,7 @@ function Navigation({
 }) {
   return (
     <NavigationMenu orientation={orientation} className='flex-none'>
-      <NavigationMenuList className='flex-col items-start gap-y-3 space-x-0 md:flex-row'>
+      <NavigationMenuList className='flex-col items-start gap-x-3 gap-y-3 space-x-0 md:flex-row'>
         {links.map((link) => (
           <NavigationMenuItem key={link.href}>
             <NavigationLink link={link} onOpen={onOpen} />

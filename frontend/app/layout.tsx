@@ -6,7 +6,7 @@ import { cookieToInitialState } from 'wagmi'
 import { config } from '@/wagmi.config'
 import Web3ModalProvider from '@/components/WalletConnect'
 import { ThemeProvider } from '@/components/ThemeProvider'
-import { Toaster } from '@/components/ui/sonner'
+import { Toaster } from '@/components/ui/toaster'
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '700', '800'] })
 
