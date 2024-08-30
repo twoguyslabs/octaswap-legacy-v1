@@ -127,7 +127,7 @@ export default function Stake() {
     }
   }, [selectedTier])
 
-  const isLoading = isLoadingTiers || isLoadingAllowance
+  const isLoading = isLoadingTiers
 
   const isButtonDisabled = isApproving || isStaking || !amount || !tierIndex
 
