@@ -7,6 +7,7 @@ import { config } from '@/wagmi.config'
 import Web3ModalProvider from '@/components/WalletConnect'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Toaster } from '@/components/ui/toaster'
+import { Analytics } from '@vercel/analytics/react'
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '700', '800'] })
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
             {children}
             <Toaster />
+            <Analytics />
           </ThemeProvider>
         </Web3ModalProvider>
       </body>
