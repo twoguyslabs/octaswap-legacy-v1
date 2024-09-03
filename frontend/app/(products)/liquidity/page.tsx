@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Positions from './components/Positions'
 import useFindMyliquidityPosition from '../hooks/useFindMyLiquidityPositions'
-import { Suspense } from 'react'
 
 export default function Liquidity() {
   const myPairs = useFindMyliquidityPosition()
@@ -40,9 +39,7 @@ export default function Liquidity() {
           </Button> */}
         </div>
         {myPairs.length > 0 ? (
-          <Suspense>
-            <Positions />
-          </Suspense>
+          <Positions />
         ) : (
           <div className='rounded-lg border p-3'>
             <p className='text-center'>No liqudity found</p>
