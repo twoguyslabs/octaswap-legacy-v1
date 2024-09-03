@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils'
 import ThemeToggler from '@/components/ThemeToggler'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { useAccount } from 'wagmi'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 const LINKS: { href: string; text: string }[] = [
   {
@@ -130,10 +131,10 @@ export default function ProductsNavbar() {
         </div>
         <div className={cn('hidden md:flex md:items-center', isDisconnected && 'md:gap-x-3')}>
           <ThemeToggler />
-          <w3m-button balance='hide' size='sm' />
+          <ConnectButton showBalance={{ smallScreen: false }} />
         </div>
         <div className='flex items-center gap-x-3 md:hidden'>
-          <w3m-button balance='hide' size='sm' />
+          <ConnectButton showBalance={{ smallScreen: false }} />
           <Mobile links={LINKS} isOpen={isOpen} onOpen={setIsOpen} />
         </div>
       </div>
