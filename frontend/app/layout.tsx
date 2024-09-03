@@ -21,11 +21,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const initialState = cookieToInitialState(config, headers().get('cookie'))
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={poppins.className}>
-        <Web3ModalProvider initialState={initialState}>
+        <Web3ModalProvider>
           <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
             {children}
             <Toaster />
