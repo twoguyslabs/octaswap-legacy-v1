@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowDown, ArrowLeft, CircleHelp, PlusIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Slider } from '@/components/ui/slider'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import useCurrencyFromUrl from '../../hooks/useCurrencyFromUrl'
 import useCurrency from '../../hooks/useCurrency'
 import usePair from '../../hooks/usePair'
@@ -16,7 +16,7 @@ import { ROUTER_ADDRESS } from '@/contracts/octaswapRouter'
 import useRemoveLiquidityType from '../hooks/useRemoveLiquidityType'
 import useAllowance from '../../hooks/useAllowance'
 
-export default function Remove() {
+function RemoveLiquidity() {
   const [percentToRemove, setPercentToRemove] = useState(100)
 
   const { input: inputCurrency, output: outputCurrency } = useCurrencyFromUrl()
@@ -119,5 +119,13 @@ export default function Remove() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function Remove() {
+  return (
+    <Suspense>
+      <RemoveLiquidity />
+    </Suspense>
   )
 }

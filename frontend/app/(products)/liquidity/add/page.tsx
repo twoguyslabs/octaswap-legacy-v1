@@ -16,7 +16,7 @@ import LiquidityDetails from '../components/LiquidityDetails'
 import { ArrowLeft, PlusIcon } from 'lucide-react'
 import CurrencyDrawer from '../../swap/components/CurrencyDrawer'
 
-export default function Add() {
+function AddLiquidity() {
   const { input: inputCurrency, output: outputCurrency } = useCurrencyFromUrl()
 
   const inputValue = inputCurrency ? inputCurrency : 'OCTA'
@@ -54,83 +54,89 @@ export default function Add() {
   } = useLiquidity(inputAmount, outputAmount, slippage.percent, input.currency, output.currency, deadline)
 
   return (
-    <Suspense>
-      <main>
-        <div className='py-5 min-[425px]:mx-auto min-[425px]:max-w-md'>
-          <div className='rounded-lg border p-2'>
-            <div className='flex flex-col gap-y-2'>
-              <div className='flex items-center justify-between'>
-                <Button variant='ghost' size='icon' asChild>
-                  <Link href='/liquidity'>
-                    <ArrowLeft />
-                  </Link>
-                </Button>
-                <p className='font-semibold'>Add liquidity</p>
-                <DexSettings
-                  slippage={slippage}
-                  onSetSlippage={setSlippage}
-                  minutes={minutes}
-                  onSetMinutes={setMinutes}
-                />
-              </div>
-              <div className='relative'>
-                <SwapBox
-                  currencyAmount={inputAmount || quoteIn}
-                  onSetAmount={setInputAmount}
-                  currency={input.currency}
-                  onSelectCurrency={setInput}
-                  onOpenDrawer={setIsDrawerOpen}
-                />
-                <div className='my-2 text-center'>
-                  <button className='cursor-default align-middle'>
-                    <PlusIcon />
-                  </button>
-                </div>
-                <SwapBox
-                  currencyAmount={outputAmount || quoteOut}
-                  onSetAmount={setOutputAmount}
-                  currency={output.currency}
-                  onSelectCurrency={setOutput}
-                  onOpenDrawer={setIsDrawerOpen}
-                />
-                <CurrencyDrawer
-                  inputCurrency={input.currency}
-                  outputCurrency={output.currency}
-                  isDrawerOpen={isDrawerOpen}
-                  onOpenDrawer={setIsDrawerOpen}
-                  inputSelectorState={input.selectorState}
-                  outputSelectorState={output.selectorState}
-                  onSelectInputCurrency={setInput}
-                  onSelectOutputCurrency={setOutput}
-                />
-              </div>
+    <main>
+      <div className='py-5 min-[425px]:mx-auto min-[425px]:max-w-md'>
+        <div className='rounded-lg border p-2'>
+          <div className='flex flex-col gap-y-2'>
+            <div className='flex items-center justify-between'>
+              <Button variant='ghost' size='icon' asChild>
+                <Link href='/liquidity'>
+                  <ArrowLeft />
+                </Link>
+              </Button>
+              <p className='font-semibold'>Add liquidity</p>
+              <DexSettings
+                slippage={slippage}
+                onSetSlippage={setSlippage}
+                minutes={minutes}
+                onSetMinutes={setMinutes}
+              />
             </div>
-            <LiquidityDetails
-              currencyA={input.currency}
-              currencyB={output.currency}
-              amountA={inputAmount || quoteIn}
-              amountB={outputAmount || quoteOut}
-              quoteInPerOne={quoteInPerOne}
-              quoteOutPerOne={quoteOutPerOne}
-            />
-            <LiquidityButton
-              inputCurrency={input.currency}
-              outputCurrency={output.currency}
-              isRouterAllowanceA={isRouterAllowanceA}
-              isRouterAllowanceB={isRouterAllowanceB}
-              isApprovePayloadA={isApprovePayloadA}
-              isApprovePayloadB={isApprovePayloadB}
-              isApprovingA={isApprovingA}
-              isApprovingB={isApprovingB}
-              isLiquidityType={isLiquidityType}
-              isAddingLiquidity={isAddingLiquidity}
-              onHandleApproveA={handleOnApproveA}
-              onHandleApproveB={handleOnApproveB}
-              onHandleAdd={handleOnAdd}
-            />
+            <div className='relative'>
+              <SwapBox
+                currencyAmount={inputAmount || quoteIn}
+                onSetAmount={setInputAmount}
+                currency={input.currency}
+                onSelectCurrency={setInput}
+                onOpenDrawer={setIsDrawerOpen}
+              />
+              <div className='my-2 text-center'>
+                <button className='cursor-default align-middle'>
+                  <PlusIcon />
+                </button>
+              </div>
+              <SwapBox
+                currencyAmount={outputAmount || quoteOut}
+                onSetAmount={setOutputAmount}
+                currency={output.currency}
+                onSelectCurrency={setOutput}
+                onOpenDrawer={setIsDrawerOpen}
+              />
+              <CurrencyDrawer
+                inputCurrency={input.currency}
+                outputCurrency={output.currency}
+                isDrawerOpen={isDrawerOpen}
+                onOpenDrawer={setIsDrawerOpen}
+                inputSelectorState={input.selectorState}
+                outputSelectorState={output.selectorState}
+                onSelectInputCurrency={setInput}
+                onSelectOutputCurrency={setOutput}
+              />
+            </div>
           </div>
+          <LiquidityDetails
+            currencyA={input.currency}
+            currencyB={output.currency}
+            amountA={inputAmount || quoteIn}
+            amountB={outputAmount || quoteOut}
+            quoteInPerOne={quoteInPerOne}
+            quoteOutPerOne={quoteOutPerOne}
+          />
+          <LiquidityButton
+            inputCurrency={input.currency}
+            outputCurrency={output.currency}
+            isRouterAllowanceA={isRouterAllowanceA}
+            isRouterAllowanceB={isRouterAllowanceB}
+            isApprovePayloadA={isApprovePayloadA}
+            isApprovePayloadB={isApprovePayloadB}
+            isApprovingA={isApprovingA}
+            isApprovingB={isApprovingB}
+            isLiquidityType={isLiquidityType}
+            isAddingLiquidity={isAddingLiquidity}
+            onHandleApproveA={handleOnApproveA}
+            onHandleApproveB={handleOnApproveB}
+            onHandleAdd={handleOnAdd}
+          />
         </div>
-      </main>
+      </div>
+    </main>
+  )
+}
+
+export default function Add() {
+  return (
+    <Suspense>
+      <AddLiquidity />
     </Suspense>
   )
 }
