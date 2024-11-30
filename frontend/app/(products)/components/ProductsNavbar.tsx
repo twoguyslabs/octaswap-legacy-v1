@@ -32,7 +32,7 @@ const LINKS: { href: string; text: string }[] = [
     text: 'Staking',
   },
   {
-    href: 'https://octaswap.io/launchpad',
+    href: 'https://launchpad.octaswap.io/dashboard',
     text: 'Launchpad',
   },
   {
