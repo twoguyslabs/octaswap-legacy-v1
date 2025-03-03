@@ -10,11 +10,11 @@ import useSlippage from '../../hooks/useSlippage'
 import useDeadline from '../../hooks/useDeadline'
 import useLiquidity from '../hooks/useLiquidity'
 import DexSettings from '../../components/DexSettings'
-import SwapBox from '../../swap/components/SwapBox'
+import SwapBox from '../../_swap/components/SwapBox'
 import LiquidityButton from '../components/LiquidityButton'
 import LiquidityDetails from '../components/LiquidityDetails'
 import { ArrowLeft, PlusIcon } from 'lucide-react'
-import CurrencyDrawer from '../../swap/components/CurrencyDrawer'
+import CurrencyDrawer from '../../_swap/components/CurrencyDrawer'
 
 function AddLiquidity() {
   const { input: inputCurrency, output: outputCurrency } = useCurrencyFromUrl()

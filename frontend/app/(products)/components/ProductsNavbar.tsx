@@ -20,11 +20,11 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 const LINKS: { href: string; text: string }[] = [
   {
-    href: '/swap',
+    href: 'https://app.octaswap.io',
     text: 'Swap',
   },
   {
-    href: '/liquidity',
+    href: 'https://app.octaswap.io/liquidity',
     text: 'Liquidity',
   },
   {
@@ -34,10 +34,6 @@ const LINKS: { href: string; text: string }[] = [
   {
     href: 'https://launchpad.octaswap.io/dashboard',
     text: 'Launchpad',
-  },
-  {
-    href: 'https://octaswap.io/claim',
-    text: 'Vesting',
   },
 ]
 
@@ -52,11 +48,6 @@ function NavigationLink({ link, onOpen }: { link: LinksType[number]; onOpen?: Di
       <NavigationMenuLink
         className={cn(navigationMenuTriggerStyle(), 'text-xl md:text-lg')}
         active={isActive}
-        target={
-          link.href === 'https://octaswap.io/launchpad' || link.href === 'https://octaswap.io/claim'
-            ? '_blank'
-            : '_self'
-        }
         onClick={() => onOpen?.(false)}
       >
         {link.text}

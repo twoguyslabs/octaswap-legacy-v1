@@ -12,8 +12,8 @@ import { Analytics } from '@vercel/analytics/react'
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '700', '800'] })
 
 export const metadata: Metadata = {
-  title: 'OctaSwap',
-  description: 'OctaSwap - AMM. FARM. STAKING. LAUNCHPAD',
+  title: 'OctaSwap Staking',
+  description: 'OctaSwap - Trade. Stake. Launch.',
 }
 
 export default function RootLayout({

@@ -1,5 +1,5 @@
 import { formatEther } from 'viem'
-import usePoolShare from '../liquidity/hooks/usePoolShare'
+import usePoolShare from '../_liquidity/hooks/usePoolShare'
 import useErcPairBalance from './useErcPairBalance'
 import usePairReserves from './usePairReserves'
 
